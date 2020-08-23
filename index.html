@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Insurance Quote</title>
+    <!--BOOTSTRAP TEMPLATE FROM https://colorlib.com/wp/template/contact-form-v5/-->
+    
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/noui/nouislider.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+<script src="js/javascript.js"></script>    
+
+
+</head>
+<body onload="countDown(240,'timer')">
+
+  
+	<div class="container-contact100">
+      <div class="wrap-contact100">
+        <p id="timer"></p>
+		  <form name="insuranceForm"class="contact100-form validate-form" id="form_id" onsubmit="return validateForm()" >
+			<span class="contact100-form-title">
+				Get your instant quote!
+			</span>
+			 <div class="wrap-input100 bg1 rs1-wrap-input100">
+                    <span class="label-input100">Name</span>
+					<input class="input100" type="text" name="name" id="name" placeholder="Enter Name" onkeypress="return lettersOnly(event)" required>
+				</div>
+
+			<div class="wrap-input100 bg1 rs1-wrap-input100">
+					<span class="label-input100">Surname</span>
+					<input class="input100" type="text" name="surname" id="surname" placeholder="Enter Surname" onkeypress="return lettersOnly(event)" required>
+				</div>
+
+				<div class="wrap-input100 bg1 rs1-wrap-input100">
+					<span class="label-input100">Age</span>
+					<input class="input100" type="text" id="age" name="age" min="17"  value="" placeholder="Enter Age" onkeypress="return isNumber(event)" onchange="totalCost();checkAgeValid()"required>
+				</div>
+                
+                       <div class="wrap-input200">
+					<span class="label-input200">Gender</span>
+                     <input class="input-radio100" id="radio1" type="radio" name="gender" value="Male" onclick="totalCost()">
+							<label class="label-radio100" for="radio1">
+								Male
+							</label>
+                    <input class="input-radio100" id="radio2" type="radio" name="gender" value="Female" onclick="totalCost()">
+							<label class="label-radio100" for="radio2">
+						     	Female
+							</label>
+		
+			        </div>
+                
+                
+                	<div class="wrap-input300 bg1 rs1-wrap-input100">
+					<span class="label-input100">Phone Number</span>
+					<input class="input100" type="text"  name="phone" id="phone" placeholder="Enter Phone Number" onkeypress="return isNumber(event)" onchange="checkValidNum()" required>
+				</div>
+                
+                
+                    
+         <div class="wrap-input100 bg1 rs2-wrap-input100">
+					<span class="label-input400">Policy Start Date  <img src="images/icon.png" height="12px" width="12px"><span class="tooltiptext">The day your insurance will go into effect (MM/DD/YYYY)</span></span>   
+					<input class="input100" type="text" name="date" id="policydate" placeholder="Enter date MM/DD/YYYY" onchange="checkDate();"  required>
+                 
+				</div>      
+     
+             <div class="wrap-input100 bg1 rs2-wrap-input100">
+             	<span class="label-input200">Make</span>
+        <select class="select2" id="make" name="make"  onchange="getCarModels()"required>
+        <option selected disabled>Select make</option>
+        <option value="bmw">BMW</option>
+        <option value="skoda">SKODA</option>
+        <option value="audi">AUDI</option>
+        <option value="nissan">NISSAN</option>
+        <option value="volkswagon">VOLKSWAGON</option>
+        </select>
+      </div>
+       <div class="wrap-input100 bg1 rs2-wrap-input100">
+       <span class="label-input200">Model</span>
+    
+        <select  class="select2" name="model" id="model" onchange ="totalCost()" required>
+        <option selected disabled>Select model</option>
+        
+        </select>
+    
+      </div>
+        <div class="wrap-input100 bg1 rs2-wrap-input100">
+        	<span class="label-input200">Fuel</span>
+		  <select class="select2" id="fuel" value="" onchange="totalCost()">
+                                            <option selected disabled>Select fuel type</option>
+                                            <option>Diesel</option>
+                                            <option>Petrol</option>
+                                            <option>Hybrid</option>
+                                        </select>
+		</div>
+        
+         
+        <div class="wrap-input100 bg1 rs2-wrap-input100">
+					<span class="label-input100">Car Age</span>
+					<input class="input100" type="text" name="carage" id="carage" placeholder="Enter age of car" min="1" max="50" onkeypress="return isNumber(event)" onchange="totalCost()" required>
+				</div>
+              
+                
+          <div class="wrap-input100 bg1 rs2-wrap-input100">
+        	<span class="label-input400">Claims Free For  <img src="images/icon.png" height="12px" width="12px"><span class="tooltiptext">The years in which you have not claimed any damage</span></span>    
+     
+		<select class="select2"id="claims" name="fees"  onchange="totalCost()" required>  
+        <option value="" selected disabled>Select year</option>              
+        <option value="">1 year</option>
+        <option value="">2 years</option>
+        <option value="">3 years</option>
+        <option value="">4 years</option>
+        <option value="">>= 5 years</option>
+        </select>
+		</div>            
+        
+        <div class="wrap-input100 bg1 rs2-wrap-input100">
+					<span class="label-input100">Milage</span>
+					<input class="input100" type="text" name="milage" id="milage" placeholder="Enter Milage" onkeypress="return isNumber(event)"  onchange="totalCost()" required>
+				</div> 
+                
+          <div class="wrap-input100 bg1 rs2-wrap-input100">
+        	<span class="label-input400">Cover  <img src="images/icon.png" height="12px" width="12px"><span class="tooltiptext2">Types of motor insurance policy</span></span>   
+		  <select class="select2" id="cover" value="" onchange="totalCost()" required>
+                                            <option selected disabled>Select cover</option>
+                                            <option>Fully Comprehensive</option>
+                                            <option>Third Party Fire and theft</option>
+                                        </select>
+		</div>     
+     
+  
+        <div class="wrap-input100 bg1 rs2-wrap-input100">
+					<span class="label-input400">Value of car  <img src="images/icon.png" height="12px" width="12px"><span class="tooltiptext3">How much is your motor worth in (&euro;) </span></span>   
+					<input class="input100" type="text"  name="value" id="value" placeholder="Enter Value (in Euro)" onkeypress="return isNumber(event)"  onchange="totalCost()" required>
+				</div>  
+              
+         <div class="wrap-input200">
+					<span class="label-input400">Car Use <img src="images/icon.png" height="12px" width="12px"><span class="tooltiptext4">Social Domestic and Pleasure 
+                    covers normal day to day driving. <br> Class 1 covers using your motor for work.</span></span>   
+                    
+                    
+                     <input class="input-radio200" id="radio8" type="radio" name="radio3" onclick="totalCost()">
+							<label class="label-radio200" for="radio8">
+								Social Domestic & Pleasure
+							</label>
+                    <input class="input-radio200" id="radio9" type="radio" name="radio3" onclick="totalCost()">
+							<label class="label-radio200" for="radio9">
+						     	Class 1 Use
+							</label>   
+                     
+                               
+		
+		 </div>         
+                
+         <div class="wrap-input200">
+					<span class="label-input300">Security</span>
+                    
+                    
+                     <input class="input-radio200" id="radio3" type="radio" name="radio2" onclick="totalCost()">
+							<label class="label-radio200" for="radio3">
+								None
+							</label>
+                    <input class="input-radio200" id="radio4" type="radio" name="radio2" onclick="totalCost()">
+							<label class="label-radio200" for="radio4">
+						     	Alarm
+							</label>   
+                     <input class="input-radio200" id="radio5" type="radio" name="radio2" onclick="totalCost()">
+							<label class="label-radio200" for="radio5">
+						     	Immobiliser
+							</label>
+                     <input class="input-radio200" id="radio6" type="radio" name="radio2" onclick="totalCost()">
+							<label class="label-radio200" for="radio6">
+						     	Alarm & Immobiliser
+							</label>
+                      <input class="input-radio200" id="radio7" type="radio" name="radio2" onclick="totalCost()">
+							<label class="label-radio200" for="radio7">
+						     	Tracking device alarm & Immobiliser
+							</label> 
+                               
+		
+		 </div>  
+       
+         
+         <div class="wrap-input100 bg1 rs2-wrap-input100">
+					<span class="label-input100">Total</span>
+					<input class="input100" type="text" name="total" id="total" readonly>
+                    <input class="input100" type="hidden" name="total" id="total">
+				</div>   
+                
+                        
+     
+     	<div class="container-contact100-form-btn">
+					<input type="submit" class="contact100-form-btn" onclick="getQuote()">
+						
+					</button>
+				</div>     
+      
+					
+			</form>        
+		</div>
+	</div>
+    </div>   
+    </div>
+    </div>
+    
+           
+
+
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>      
+
+  
+
+</body>
+</html>
